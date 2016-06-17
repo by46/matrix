@@ -37,7 +37,7 @@ cp -rvf /usr/lib/python2.7/site-packages ${TMP}/usr/lib/python2.7/
 tar zcf images.tgz -C ${TMP}  .
 
 # generate Dockerfile
-
+echo fab gen_docker_file:matrix=${PWD}
 fab gen_docker_file:matrix=${PWD}
 
 # build images
