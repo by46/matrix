@@ -1,0 +1,15 @@
+FROM {image}
+
+MAINTAINER benjamin.c.yan@newegg.com
+
+{env}
+
+ADD images.tgz /
+
+WORKDIR /opt/matrix
+
+{volume}
+
+{expose}
+
+CMD [ {cmd} ]

@@ -1,0 +1,9 @@
+{
+  "name": "otter",
+  "image": "docker.neg/python:neg-biz",
+  "tag": "0.0.1",
+  "port": [80, 443],
+  "env": {"PATH": "/opt/matrix:$PATH", "DEBUG": true},
+  "volume": ["/opt/data", "/opt/home"],
+  "cmd": [ "python", "main1.py", "-P", 8080]
+}
