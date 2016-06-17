@@ -2,7 +2,6 @@
 
 PWD=$(cd `dirname $0`; pwd)
 
-echo 'debugging', ${PWD}
 WORKDIR=/home/matrix
 TMP=/tmp/images
 DEP=/tmp/matrix
@@ -10,7 +9,7 @@ DEP=/tmp/matrix
 alias fab="fab --fabfile=${PWD}/fabfile.py"
 
 cd ${WORKDIR}
-
+echo 'debugging', ${PWD}
 virtualenv ${DEP}
 
 source ${DEP}/bin/activate
