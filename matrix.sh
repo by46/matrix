@@ -9,7 +9,7 @@ DEP=/tmp/matrix
 alias fab="fab --fabfile=${PWD}/fabfile.py"
 
 cd ${WORKDIR}
-echo 'debugging', ${PWD}
+echo 'debugging', $PWD
 virtualenv ${DEP}
 
 source ${DEP}/bin/activate
