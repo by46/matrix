@@ -6,6 +6,8 @@ WORKDIR=/home/matrix
 TMP=/tmp/images
 DEP=/tmp/matrix
 
+alias fab="fab --fabfile=${PWD}"
+
 cd ${WORKDIR}
 
 virtualenv ${DEP}
@@ -35,7 +37,6 @@ cp -rvf /usr/lib/python2.7/site-packages ${TMP}/usr/lib/python2.7/
 tar zcf images.tgz -C ${TMP}  .
 
 # generate Dockerfile
-cp ${PWD}/fabfile.py .
 
 fab gen_docker_file:matrix=${PWD}
 

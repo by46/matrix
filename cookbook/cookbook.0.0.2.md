@@ -17,6 +17,9 @@ Pre-installed
 5. py-pip
 6. freetds
 7. freetds-dev
+8. docker
+9. virtualenv
+10. fabric
 
 ```shell
 sudo docker run --name onbuild --net=host -i docker.neg/alpine:3.3 /bin/sh
