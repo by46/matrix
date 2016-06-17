@@ -13,7 +13,8 @@ Usage
 如果要使用matrix来构建镜像，那么在你的项目根目录中包含一个matrix.json元数据描述文件， 来告诉matrix如何构建镜像。可以查看matrix-schema.json文件来了解matrix.json
 的详细定义。
 
-matrix-schema.json 文件内容如下：
+# matrix-schema.json
+
 ```json
 
 {
