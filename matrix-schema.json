@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "tag": {
+      "type": "string"
+    },
+    "port": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "env": {
+      "type": "object"
+    },
+    "volume": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cmd": {
+      "type": "array"
+    }
+  },
+  "required": [
+    "name",
+    "image",
+    "tag"
+  ]
+}
