@@ -1,15 +1,15 @@
 #!/usr/bin/env sh
 
-PWD=$(cd `dirname $0`; pwd)
+MATRIX_HOME=$(cd `dirname $0`; pwd)
 
 WORKDIR=/home/matrix
 TMP=/tmp/images
 DEP=/tmp/matrix
 
-alias fab="fab --fabfile=${PWD}/fabfile.py"
+alias fab="fab --fabfile=${MATRIX_HOME}/fabfile.py"
 
 cd ${WORKDIR}
-echo 'debugging', $PWD
+
 virtualenv ${DEP}
 
 source ${DEP}/bin/activate
@@ -37,8 +37,7 @@ cp -rvf /usr/lib/python2.7/site-packages ${TMP}/usr/lib/python2.7/
 tar zcf images.tgz -C ${TMP}  .
 
 # generate Dockerfile
-echo fab gen_docker_file:matrix=${PWD}
-fab gen_docker_file:matrix=${PWD}
+fab gen_docker_file:matrix=${MATRIX_HOME}
 
 # build images
 # TODO(benjamin): get image name and version
