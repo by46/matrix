@@ -6,7 +6,7 @@ WORKDIR=/home/matrix
 TMP=/tmp/images
 DEP=/tmp/matrix
 
-alias fab="fab --fabfile=${PWD}"
+alias fab="fab --fabfile=${PWD}/fabfile.py"
 
 cd ${WORKDIR}
 
