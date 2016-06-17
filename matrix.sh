@@ -2,6 +2,7 @@
 
 PWD=$(cd `dirname $0`; pwd)
 
+echo 'debugging', ${PWD}
 WORKDIR=/home/matrix
 TMP=/tmp/images
 DEP=/tmp/matrix
