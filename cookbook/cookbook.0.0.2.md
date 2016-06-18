@@ -20,6 +20,7 @@ Pre-installed
 8. docker
 9. virtualenv
 10. fabric
+11. jsonschema
 
 ```shell
 sudo docker run --name onbuild --net=host -i docker.neg/alpine:3.3 /bin/sh
@@ -41,19 +42,19 @@ apk add freetds freetds-dev
 apk add docker
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple virtualenv
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple fabric
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple jsonschema
 
 exit
 
 # on host
 # export container
-sudo docker export onbuild > onbuild.tar
+sudo docker export matrix > matrix.tar
 
 # import container as a image
 
-cat onbuild.tar | sudo docker import - matrix:0.0.2
+cat matrix.tar | sudo docker import - matrix:0.0.2
 
 # start container
-
-sudo docker run --name matrix -i -v $(which docker):$(which docker) -v /var/run/docker.sock:/var/run/docker.sock docker.neg/matrix:0.0.2 /bin/sh
+sudo docker run --rm -v /home/benjamin/git/otter:/home/matrix -v /var/run/docker.sock:/var/run/docker.sock docker.neg/matrix:0.0.2 /usr/local/bin/matrix.sh
 
 ```

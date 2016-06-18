@@ -58,5 +58,11 @@ fab gen_docker_file:matrix=${MATRIX_HOME}
 docker build -t $(fab image_name | head -n 1) .
 
 # check docker build result
+echo debugging, $?
+
 [ $? -gt 0 ] && exit 83
+
+echo debugging, $?
+
+exit 0
 

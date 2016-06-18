@@ -54,8 +54,7 @@ def valid_matrix_json(src='.', matrix='.'):
         meta_json = json.load(meta)
         with open(os.path.join(matrix, 'matrix-schema.json'), 'rb') as schema:
             schema_json = json.load(schema)
-            if jsonschema.validate(meta_json, schema_json):
-                sys.exit(1)
+            jsonschema.validate(meta_json, schema_json)
 
 
 if __name__ == '__main__':
