@@ -5,6 +5,8 @@ import logging
 import os.path
 import sys
 
+import jsonschema
+
 
 def load_settings(src):
     full_path = os.path.join(src, 'matrix.json')
@@ -45,6 +47,15 @@ def gen_docker_file(src='.', matrix='.'):
 def image_name(src='.'):
     settings = load_settings(src)
     print '{name}:{tag}'.format(name=settings.get('name'), tag=settings.get('tag', 'latest')),
+
+
+def valid_matrix_json(src='.', matrix='.'):
+    with open(os.path.join(src, 'matrix.json'), 'rb') as meta:
+        meta_json = json.load(meta)
+        with open(os.path.join(matrix, 'matrix-schema.json'), 'rb') as schema:
+            schema_json = json.load(schema)
+            if jsonschema.validate(meta_json, schema_json):
+                sys.exit(1)
 
 
 if __name__ == '__main__':

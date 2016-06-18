@@ -8,6 +8,17 @@ DEP=/tmp/matrix
 
 alias fab="fab --fabfile=${MATRIX_HOME}/fabfile.py"
 
+# check volume directory exists
+[ ! -d ${WORKDIR} ] && exit 80
+
+# check matrix.json exists
+[ ! -f "${WORKDIR}/matrix.json" ] && exit 84
+
+# check matrix.json validate
+fab valid_matrix_json:src=${WORKDIR},matrix=${MATRIX_HOME}
+[ $? -gt 0 ] && exit 85
+
+
 cd ${WORKDIR}
 
 virtualenv ${DEP}
@@ -16,11 +27,15 @@ source ${DEP}/bin/activate
 
 if [ -f requirements.txt ]; then
 	pip install --trusted-host 10.16.78.86 -i http://10.16.78.86:3141/simple -r requirements.txt
+	# check install result
+	[ $? -gt 0 ] && exit 81
 fi
 
 if [ -f build.sh ]; then
 	chmod +x build.sh
 	./build.sh
+	# check run custom build.sh exit status
+	[ $? -gt 0 ] && exit 82
 fi
 
 mkdir ${TMP}
@@ -40,8 +55,8 @@ tar zcf images.tgz -C ${TMP}  .
 fab gen_docker_file:matrix=${MATRIX_HOME}
 
 # build images
-# TODO(benjamin): get image name and version
-echo docker build -t $(fab image_name | head -n 1) .
-
 docker build -t $(fab image_name | head -n 1) .
+
+# check docker build result
+[ $? -gt 0 ] && exit 83
 

@@ -10,7 +10,7 @@ Matrix
 
 Usage
 --------------------------------------------------
-如果要使用matrix来构建镜像，那么在你的项目根目录中包含一个matrix.json元数据描述文件， 来告诉matrix如何构建镜像。可以查看matrix-schema.json文件来了解matrix.json
+如果要使用matrix来构建镜像，项目根目录中需要包含一个matrix.json元数据描述文件， 来告诉matrix如何构建镜像。可以查看matrix-schema.json文件来了解matrix.json
 的详细定义。
 
 # matrix-schema.json
@@ -63,4 +63,14 @@ Usage
 
 ```shell
 sudo docker run --rm -v /home/benjamin/git/otter:/home/matrix -v /var/run/docker.sock:/var/run/docker.sock matrix:0.0.2 /usr/local/bin/matrix.sh
+
 ```
+
+Exit Status
+-------------------
+1. 80 - /home/matrix is not exists
+2. 81 - install requirements.txt error
+3. 82 - run custom build.sh error
+4. 83 - build image error
+5. 84 - matrix.json is not exists
+6. 85 - matrix.json content invalid, read the matrix-schema.json for detail
