@@ -1,5 +1,4 @@
-Matrix
-=========================
+# Matrix
 
 1. 类似Python这样的开发语言， 在使用过程中，很可能使用到第三方扩展依赖库，这些依赖库需要一个C语言编译环境，但是编译工具往往比较庞大，
 例如GCC的编译工具链就比较庞大，如果直接在Docker基础镜像中包含GCC编译工具链，就会构造的应用程序镜像的大小也会随之增加。
@@ -8,12 +7,12 @@ Matrix
 
 这就是matrix产生原因，是构建Python项目变得容易，简单。
 
-Usage
---------------------------------------------------
+## Usage
+
 如果要使用matrix来构建镜像，项目根目录中需要包含一个matrix.json元数据描述文件， 来告诉matrix如何构建镜像。可以查看matrix-schema.json文件来了解matrix.json
 的详细定义。
 
-# matrix-schema.json
+### matrix-schema.json
 
 ```json
 
@@ -66,8 +65,8 @@ sudo docker run --rm -v /home/benjamin/git/otter:/home/matrix -v /var/run/docker
 
 ```
 
-Exit Status
--------------------
+## Exit Status
+
 1. 80 - /home/matrix is not exists
 2. 81 - install requirements.txt error
 3. 82 - run custom build.sh error
