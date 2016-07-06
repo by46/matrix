@@ -21,7 +21,7 @@ fab valid_matrix_json:src=${WORKDIR},matrix=${MATRIX_HOME}
 
 cd ${WORKDIR}
 
-virtualenv ${DEP}
+# virtualenv ${DEP}
 
 source ${DEP}/bin/activate
 
