@@ -44,6 +44,8 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple virtualenv
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple fabric
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple jsonschema
 
+virtualenv /tmp/matrix
+
 exit
 
 # on host

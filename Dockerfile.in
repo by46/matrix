@@ -6,7 +6,7 @@ MAINTAINER benjamin.c.yan@newegg.com
 
 ADD images.tgz /
 
-WORKDIR /opt/matrix
+WORKDIR /opt/biz
 
 {volume}
 
