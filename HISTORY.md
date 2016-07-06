@@ -14,3 +14,4 @@ Matrix
 1. add [virtualenv](https://virtualenv.pypa.io/en/stable)
 2. add [Fabric](http://www.fabfile.org)
 3. add [jsonschema](https://github.com/Julian/jsonschema)
+4. validate matrix.json
