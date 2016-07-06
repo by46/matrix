@@ -41,10 +41,8 @@ fi
 mkdir ${TMP}
 
 # collect source file
-mkidr -p ${TMP}/opt
-ls ${WORKDIR}
+mkdir -p ${TMP}/opt
 cp  -rvf ${WORKDIR} ${TMP}/opt/biz
-exit
 
 # collect dependency libs
 mkdir -p ${TMP}/usr/lib/python2.7/
