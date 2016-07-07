@@ -62,7 +62,7 @@
 执行/usr/local/bin/matrix.sh, 执行命令如下：
 
 ```shell
-sudo docker run --rm -v /home/benjamin/git/otter:/home/matrix -v /var/run/docker.sock:/var/run/docker.sock matrix:0.0.2 /usr/local/bin/matrix.sh
+sudo docker run --rm -v /home/benjamin/git/otter:/home/matrix -v $(which docker):$(which docker) -v /var/run/docker.sock:/var/run/docker.sock matrix:0.0.2 /usr/local/bin/matrix.sh
 
 ```
 
@@ -74,3 +74,6 @@ sudo docker run --rm -v /home/benjamin/git/otter:/home/matrix -v /var/run/docker
 4. 83 - build image error
 5. 84 - matrix.json is not exists
 6. 85 - matrix.json content invalid, read the matrix-schema.json for detail
+
+## 部署结构
+构建成功之后，代码会部署到容器中/opt/biz目录，并且当前工作目录也会被设置成/opt/biz

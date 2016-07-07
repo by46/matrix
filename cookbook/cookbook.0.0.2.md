@@ -50,7 +50,7 @@ exit
 
 # on host
 # export container
-sudo docker export matrix > matrix.tar
+sudo docker export onbuild > matrix.tar
 
 # import container as a image
 
