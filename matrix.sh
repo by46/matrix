@@ -31,9 +31,9 @@ if [ -f requirements.txt ]; then
 	[ $? -gt 0 ] && exit 81
 fi
 
-if [ -f build.sh ]; then
-	chmod +x build.sh
-	./build.sh
+if [ -f matrix_build.sh ]; then
+	chmod +x matrix_build.sh
+	./matrix_build.sh
 	# check run custom build.sh exit status
 	[ $? -gt 0 ] && exit 82
 fi
