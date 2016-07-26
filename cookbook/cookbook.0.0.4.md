@@ -10,17 +10,19 @@ Build
 
 Pre-installed
 ---------------------
-1. build-base
-2. git
-3. python
-4. python-dev
-5. py-pip
-6. freetds
-7. freetds-dev
-8. docker
-9. virtualenv
-10. fabric
-11. jsonschema
+- build-base
+- git
+- python
+- python-dev
+- py-pip
+- freetds
+- freetds-dev
+- docker
+- virtualenv
+- fabric
+- jsonschema
+- gevent
+
 
 ```shell
 sudo docker run --name onbuild --net=host -i docker.neg/alpine:3.3 /bin/sh
@@ -46,6 +48,7 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple jsonschema
 
 virtualenv /tmp/matrix
 
+pip --trusted-host scmesos06 install -i https://scmesos06/simple gevent
 exit
 
 # on host
@@ -54,9 +57,9 @@ sudo docker export onbuild > matrix.tar
 
 # import container as a image
 
-cat matrix.tar | sudo docker import - matrix:0.0.3
+cat matrix.tar | sudo docker import - matrix:0.0.4
 
 # start container
-sudo docker run --rm -v /home/benjamin/git/otter:/home/matrix -v /var/run/docker.sock:/var/run/docker.sock docker.neg/matrix:0.0.3 /usr/local/bin/matrix.sh
+sudo docker run --rm -v /home/benjamin/git/otter:/home/matrix -v $(which docker):$(which docker) -v /var/run/docker.sock:/var/run/docker.sock docker.neg/matrix:0.0.4 /usr/local/bin/matrix.sh
 
 ```
