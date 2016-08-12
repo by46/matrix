@@ -229,6 +229,10 @@ def gen_docker_file(src='.', matrix='.'):
     env = settings.get('env', {})
     settings['env'] = '\r\n'.join(['ENV {0} {1}'.format(*item) for item in env.iteritems()])
 
+    hosts = settings.get('hosts', [])
+    if hosts:
+        runs = '\r\n'.join(['RUN echo "{ip} {host}" >> /etc/hosts'.format(**host) for host in hosts])
+
     docker_file_template = os.path.join(matrix, 'Dockerfile.in')
     with open(docker_file_template, 'rb') as f:
         template = f.read()
