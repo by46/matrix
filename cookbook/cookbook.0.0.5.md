@@ -25,7 +25,7 @@ Pre-installed
 
 
 ```shell
-sudo docker run --name onbuild --net=host -i docker.neg/alpine:3.3 /bin/sh
+sudo docker run --name onbuild --net=host -it docker.neg/alpine:3.3 /bin/sh
 
 # in container
 
@@ -57,7 +57,7 @@ sudo docker export onbuild > matrix.tar
 
 # import container as a image
 
-cat matrix.tar | sudo docker import - matrix:0.0.5
+cat matrix.tar | sudo docker import - docker.neg/matrix:0.0.5
 
 # start container
 sudo docker run --rm -v /home/benjamin/git/otter:/home/matrix -v $(which docker):$(which docker) -v /var/run/docker.sock:/var/run/docker.sock docker.neg/matrix:0.0.4 /usr/local/bin/matrix.sh
