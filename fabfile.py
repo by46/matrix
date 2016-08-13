@@ -179,7 +179,8 @@ def strip_sdist_extras(filelist):
                 and not file_matches_regexps(name, EXCLUDE_regexps))]
 
 
-def copy(src, dst, manifest="MANIFEST.in"):
+def copy(src, dst):
+    manifest = os.path.normpath(os.path.join(__file__, '..', 'MANIFEST.in'))
     if os.path.exists(manifest):
         read_manifest(manifest)
 

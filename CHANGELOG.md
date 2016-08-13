@@ -3,6 +3,7 @@
 ## 0.0.4
 ## Added
 - pre-install [gevent](http://www.gevent.org/)
+- Copy files by MANIFEST.in
 
 ## 0.0.2
 --------------------------
