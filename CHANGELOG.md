@@ -1,9 +1,5 @@
 # Change log
 
-## 0.0.5
-## Added
-- Process /etc/hosts
-
 ## 0.0.4
 ## Added
 - pre-install [gevent](http://www.gevent.org/)

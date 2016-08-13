@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 import argparse
+import errno
 import fnmatch
 import json
 import locale
@@ -36,6 +37,7 @@ def cd(directory):
 
 
 def get_all_file_in(dirname):
+    prefix = len(dirname)
     name_list = []
     for root, dirs, files in os.walk(dirname):
         # for dir in dirs:
@@ -43,11 +45,13 @@ def get_all_file_in(dirname):
         #         name_list.append(dir.decode(locale.getpreferredencoding()))
         #     else:
         #         name_list.append(dir)
+        normal_root = root[prefix + 1:]
         for name in files:
             if isinstance(name, bytes):
-                name_list.append(os.path.join(root, name.decode(locale.getpreferredencoding())))
+                name_list.append(
+                    os.path.normpath(os.path.join(normal_root, name.decode(locale.getpreferredencoding()))))
             else:
-                name_list.append(os.path.join(root, name))
+                name_list.append(os.path.normpath(os.path.join(normal_root, name)))
     return name_list
 
 
@@ -57,10 +61,8 @@ def _glob_to_regexp(pat):
     return re.sub(r'((?<!\\)(\\\\)*)\.', r'\1[^%s]' % sep, pat)
 
 
-def read_manifest():
-    if not os.path.isfile('MANIFEST.in'):
-        return
-    include, include_regexps, exclude, exclude_regexps = _get_message_from_manifest('MANIFEST.in')
+def read_manifest(manifest='MANIFEST.in'):
+    include, include_regexps, exclude, exclude_regexps = _get_message_from_manifest(manifest)
     INCLUDE.extend(include)
     INCLUDE_regexps.extend(include_regexps)
     EXCLUDE.extend(exclude)
@@ -173,32 +175,21 @@ def strip_sdist_extras(filelist):
     """
     # file_names = os.path.
     return [name for name in filelist
-            if (not file_matches(os.path.basename(name), EXCLUDE)
-                and not file_matches_regexps(os.path.basename(name), EXCLUDE_regexps)
-                and (file_matches(os.path.basename(name), INCLUDE)
-                     or file_matches_regexps(os.path.basename(name), INCLUDE_regexps)))]
+            if (not file_matches(name, EXCLUDE)
+                and not file_matches_regexps(name, EXCLUDE_regexps))]
 
 
-def copy_files(srcdir, destdir, rule=None):
-    with cd(srcdir):
-        if isinstance(rule, list):
-            _get_message_from_list(rule)
-        elif rule is None:
-            read_manifest()
-    all_source_file = get_all_file_in(srcdir)
+def copy(src, dst, manifest="MANIFEST.in"):
+    if os.path.exists(manifest):
+        read_manifest(manifest)
+
+    all_source_file = get_all_file_in(src)
     source_file = strip_sdist_extras(all_source_file)
-    for filepath in source_file:
-        tmp_path = os.path.relpath(filepath, srcdir)
-        destfile = os.path.join(destdir, tmp_path)
-        # filename should not be absolute, but let's double-check
-        # assert destfile.startswith(destdir + os.path.sep)
-        destfiledir = os.path.dirname(destfile)
-        if not os.path.isdir(destfiledir):
-            os.makedirs(destfiledir)
-        # if os.path.isdir(filename):
-        #     os.mkdir(destfile)
-        # else:
-        shutil.copy2(filepath, destfile)
+    for item in source_file:
+        src_file = os.path.join(src, item)
+        dst_file = os.path.join(dst, item)
+        ensure_dir(os.path.dirname(dst_file))
+        shutil.copy2(src_file, dst_file)
 
 
 def load_settings(src):
@@ -229,10 +220,6 @@ def gen_docker_file(src='.', matrix='.'):
     env = settings.get('env', {})
     settings['env'] = '\r\n'.join(['ENV {0} {1}'.format(*item) for item in env.iteritems()])
 
-    hosts = settings.get('hosts', [])
-    if hosts:
-        settings['run'] = '\r\n'.join(['RUN echo "{ip} {host}" >> /etc/hosts'.format(**host) for host in hosts])
-
     docker_file_template = os.path.join(matrix, 'Dockerfile.in')
     with open(docker_file_template, 'rb') as f:
         template = f.read()
@@ -252,6 +239,15 @@ def valid_matrix_json(src='.', matrix='.'):
         with open(os.path.join(matrix, 'matrix-schema.json'), 'rb') as schema:
             schema_json = json.load(schema)
             jsonschema.validate(meta_json, schema_json)
+
+
+def ensure_dir(path):
+    """os.makedirs without EEXIST."""
+    try:
+        os.makedirs(path)
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
 
 
 if __name__ == '__main__':

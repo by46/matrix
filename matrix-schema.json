@@ -26,12 +26,6 @@
         "type": "string"
       }
     },
-    "hosts": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
-    },
     "cmd": {
       "type": "array"
     }

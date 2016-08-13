@@ -5,6 +5,5 @@
   "port": [80, 443],
   "env": {"PATH": "/opt/matrix:$PATH", "DEBUG": true},
   "volume": ["/opt/data", "/opt/home"],
-  "cmd": [ "python", "main1.py", "-P", 8080],
-  "hosts":[{"ip":"127.0.0.1", "host":"trgit2"}, {"ip": "120.12112.12", "host":"scmesos06"}]
+  "cmd": [ "python", "main1.py", "-P", 8080]
 }

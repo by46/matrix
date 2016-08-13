@@ -1,0 +1,8 @@
+prune .git
+prune venv
+prune .idea
+prune ci
+prune test
+
+global-exclude *.pyc
+exclude image.tgz
