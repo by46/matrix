@@ -57,9 +57,13 @@ sudo docker export onbuild > matrix.tar
 
 # import container as a image
 
-cat matrix.tar | sudo docker import - matrix:0.0.4
+cat matrix.tar | sudo docker import - docker.neg/matrix:0.0.4
+
+sudo docker push docker.neg/matrix:0.0.4
 
 # start container
+sudo docker pull docker.neg/matrix:0.0.4
+
 sudo docker run --rm -v /home/benjamin/git/otter:/home/matrix -v $(which docker):$(which docker) -v /var/run/docker.sock:/var/run/docker.sock docker.neg/matrix:0.0.4 /usr/local/bin/matrix.sh
 
 ```
