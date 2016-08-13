@@ -5,4 +5,4 @@ prune ci
 prune test
 
 global-exclude *.pyc
-exclude image.tgz
+exclude images.tgz
