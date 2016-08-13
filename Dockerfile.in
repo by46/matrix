@@ -2,8 +2,6 @@ FROM {image}
 
 MAINTAINER benjamin.c.yan@newegg.com
 
-{run}
-
 {env}
 
 ADD images.tgz /
