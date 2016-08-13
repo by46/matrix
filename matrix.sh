@@ -41,12 +41,13 @@ fi
 mkdir ${TMP}
 
 # collect source file
-mkdir -p ${TMP}/opt
-cp  -rvf ${WORKDIR} ${TMP}/opt/biz
+mkdir -p ${TMP}/opt/biz
+fab copy:${WORKDIR},${TMP}/opt/biz
 
 # collect dependency libs
 mkdir -p ${TMP}/usr/lib/python2.7/
-cp -rvf ${DEP}/lib/python2.7/site-packages ${TMP}/usr/lib/python2.7/
+
+fab copy:${DEP}/lib/python2.7/site-packages ${TMP}/usr/lib/python2.7/
 
 # package resource
 tar zcf images.tgz -C ${TMP}  .

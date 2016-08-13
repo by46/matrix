@@ -189,6 +189,7 @@ def copy(src, dst, manifest="MANIFEST.in"):
         src_file = os.path.join(src, item)
         dst_file = os.path.join(dst, item)
         ensure_dir(os.path.dirname(dst_file))
+        print 'Copy', src_file, '->', dst_file
         shutil.copy2(src_file, dst_file)
 
 
