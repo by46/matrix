@@ -111,11 +111,11 @@ sudo docker export onbuild > matrix.tar
 
 cat matrix.tar | sudo docker import - docker.neg/matrix:0.0.5
 
-sudo docker push docker.neg/matrix:0.0.4
+sudo docker push docker.neg/matrix:0.0.5
 
 # start container
-sudo docker pull docker.neg/matrix:0.0.4
+sudo docker pull docker.neg/matrix:0.0.5
 
-sudo docker run --rm -v /home/benjamin/git/otter:/home/matrix -v /var/run/docker.sock:/var/run/docker.sock docker.neg/matrix:0.0.5 /usr/local/bin/matrix.sh
+sudo docker run --rm -it -v /home/benjamin/git/otter:/home/matrix -v /var/run/docker.sock:/var/run/docker.sock docker.neg/matrix:0.0.5 /usr/local/bin/matrix.sh
 
 ```

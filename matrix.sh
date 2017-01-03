@@ -48,7 +48,7 @@ fab copy:${WORKDIR},${TMP}/opt/biz
 # collect dependency libs
 mkdir -p ${TMP}/usr/lib/python2.7/
 
-fab copy:${DEP}/lib/python2.7/site-packages,${TMP}/usr/lib/python2.7/
+fab copy:${DEP}/lib/python2.7/site-packages,${TMP}/usr/lib/python2.7/site-packages
 
 # package resource
 tar zcf images.tgz -C ${TMP}  .
