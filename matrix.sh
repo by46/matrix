@@ -5,6 +5,7 @@ MATRIX_HOME=$(cd `dirname $0`; pwd)
 WORKDIR=/home/matrix
 TMP=/tmp/images
 DEP=/tmp/matrix
+CACHE=/tmp/pip-cache
 
 alias fab="fab --fabfile=${MATRIX_HOME}/fabfile.py"
 
@@ -26,7 +27,7 @@ cd ${WORKDIR}
 source ${DEP}/bin/activate
 
 if [ -f requirements.txt ]; then
-	pip install --trusted-host 10.16.78.86 -i http://10.16.78.86:3141/simple -r requirements.txt
+	pip install --trusted-host scmesos06 -i http://scmesos06/simple --cache-dir=${CACHE} -r requirements.txt
 	# check install result
 	[ $? -gt 0 ] && exit 81
 fi
